@@ -21,16 +21,16 @@ $emptyStartCases = ($emptyStartCases == -1) ? 6 : $emptyStartCases;
 $lastDayOfWeekNumber = gregoriantojd($monthChoice, $daysInMonth, $yearChoice);
 // TRANSFORMATION DU DERNIER JOUR EN NOMBRE DE LA SEMAINE
 $emptyEndCases = jddayofweek($lastDayOfWeekNumber, 0)-1;
-// DIMANCHE -1 DEVIENT 6
+// DIMANCHE -1 DEVIENT 600
 $emptyEndCases = ($emptyEndCases == -1) ? 6 : $emptyEndCases;
 // CALCUL POUR SAVOIR LE NOMBRE DE CASES VIDES A LA FIN DU TABLEAU
-$emptyEndCases = abs(-6+$emptyEndCases);
+$emptyEndCases = 6-$emptyEndCases;
 // NOMBRE DE CASES DANS LE CALENDRIER
 $casesCalendar = $emptyStartCases + $emptyEndCases + $daysInMonth;
 // NOMBRE DE LIGNES DANS LE CALENDRIER
 $numberRows = $casesCalendar / 7;
 // DECLARATION ET INITIALISATION DU JOUR A 1
-$realDaynumber = 1;
+$daynumber = 1;
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -46,13 +46,13 @@ $realDaynumber = 1;
       <select name="monthChoice">
         <?php for ($month = 1; $month <= 12; $month++) { ?>
           <option value="<?= $month; ?>"><?= $month; ?></option>
-        <?php }; ?>
+        <?php } ?>
       </select>
       <!-- SELECTEUR POUR L'ANNEE -->
       <select name="yearChoice">
         <?php for ($year = 2000; $year <= 2018; $year++) { ?>
           <option value="<?= $year; ?>"><?= $year; ?></option>
-        <?php }; ?>
+        <?php } ?>
       </select>
       <input type="submit" value="Changer la date" />
     </form>
@@ -73,19 +73,18 @@ $realDaynumber = 1;
         <tr>
           <?php /*boucle pour les jours*/ for ($days = 7; $days != 0; $days--) { ?>
           <td>
-            <?php /*affichage du jour si on est entre les cases vides*/
-            if($caseNumber >= $emptyStartCases && $realDaynumber <= $daysInMonth){
-              echo $realDaynumber;
-              $realDaynumber++;
-              $caseNumber++;
-            }else{
-              $caseNumber++;
+            <?php /*affichage du jour si on a passé les cases vides et qu'on n'a pas dépassé le nombre de jours dans le mois et on incrémente le jour*/
+            if($caseNumber >= $emptyStartCases && $daynumber <= $daysInMonth){
+              echo $daynumber;
+              $daynumber++;
             }
+            // incrémentation de la case du tableau
+            $caseNumber++;
            ?>
           </td>
-          <?php }; ?>
+          <?php } ?>
         </tr>
-      <?php }; ?>
+      <?php } ?>
       </tbody>
     </table>
   </body>
