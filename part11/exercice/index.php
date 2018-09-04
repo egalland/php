@@ -9,18 +9,27 @@ $chiffre2 = 0;
 (!empty($_POST['chiffre2']) && is_numeric($_POST['chiffre2']))? $chiffre2 = $_POST['chiffre2'] : $chiffre2 = $chiffre2;
 // Si on envoi une requete on execute le code
 if(!empty($_POST)){
-    // addition
+        // addition
     if (isset($_POST['addition'])){
         $result = $chiffre1 + $chiffre2;
+    }
         // soustraction
-    }elseif(isset($_POST['soustraction'])){
+    if(isset($_POST['soustraction'])){
         $result = $chiffre1 - $chiffre2;
+    }
         // multiplication
-    }elseif(isset($_POST['multiplication'])){
+    if(isset($_POST['multiplication'])){
         $result = $chiffre1 * $chiffre2;
+    }
         // division
-    }elseif(isset($_POST['division'])){
+    if(isset($_POST['division'])){
         $result = $chiffre1 / $chiffre2;
+    }
+        // reset
+    if(isset($_POST['reset'])){
+        $result = 0;
+        $chiffre1 = 0;
+        $chiffre2 = 0;
     }
 }
 ?>
@@ -39,6 +48,7 @@ if(!empty($_POST)){
       <input type="submit" name="soustraction" value="-"/>
       <input type="submit" name="multiplication" value="*"/>
       <input type="submit" name="division" value="/"/>
+      <input type="submit" name="reset" value="C"/>
     </form>
     <p>Résultat : <?= $result; ?></p>
   </body>
