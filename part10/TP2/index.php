@@ -28,6 +28,7 @@ include 'controllerForm.php';
                         <option selected disabled>Selectionner une civilité</option>
                         <option value="M" <?php echo $gender == 'M' ? 'selected' : ''; ?>>M</option>
                         <option value="Mme" <?php echo $gender == 'Mme' ? 'selected' : ''; ?>>Mme</option>
+                        <option value="Autre" disabled>Autre</option>
                     </select>
                     <?php if(!empty($_POST)){ ?><p class="alert alert-danger"><?= empty($errorLog['gender'])? $gender : $errorLog['gender']; ?></p><?php } ?>
                 </div>
